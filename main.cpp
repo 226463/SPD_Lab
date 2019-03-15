@@ -253,12 +253,7 @@ int main()
 	   
       }
 
-   
- 
-       
-
-//**** trzeba zrobić teraz to samo co zrobiłeś dzisiaj rano(wtorek), ciężko mi to samemu ogarnąć. 
-//Ewentualnie moglibyśmy jeszcze zmienić sposób "eliminowania" kolejnych najmniejszych elementów *
+  
      
 
     getchar(); getchar();
