@@ -171,5 +171,5 @@ int main()
 
 stop = clock();
     czas = (double)(stop - start) / CLOCKS_PER_SEC;
-    cout << "Obliczanie iteracyjnie zajmie: " << czas << endl;
+    cout << "Obliczanie zajmie: " << czas << endl;
 }
