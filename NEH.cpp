@@ -1,5 +1,6 @@
 #include <iostream>
-//#include <time.h>
+#include <ctime>
+#include <time.h>
 #include <unistd.h>
 #include <cstdlib>	// potrzebne do system("clear");
 #include <fstream>
@@ -162,14 +163,22 @@ int cMax( int **Dane, int masz, int zad )
     }
     return czasZak[zad-1][masz-1];
 }     
-//----------------------------------------------------------------------------------------
-
+//---------------------------------------------------------------------------------------- 
+void czekaj( int iMilisekundy )
+{
+    clock_t koniec = clock() + iMilisekundy * CLOCKS_PER_SEC / 1000.0;
+    while( clock() < koniec ) continue;
+    
+}
+double obliczSekundy( clock_t czas )
+{
+    return static_cast < double >( czas ) / CLOCKS_PER_SEC;
+}
 //-- F. main -------------------------------------------------------------------
 int main()
 {  
 	int zad, masz, cmax;  
-       
-    
+    double czas1, czas2, czas;
     //-- Wczytywanie Dnych -----------------------------
 	ifstream data("dane.txt");
      data >> zad >> masz;   
@@ -188,8 +197,14 @@ int main()
    cmax = cMax(Dane, masz, zad);
    cout << "Nieposortowane \n"<< "cmax = " << cmax << endl;
    wysDane(Dane,zad,masz);
+   czas1 = obliczSekundy( clock() ); //Start czasu - pierwszy pomiar
    Dane = NEH( Dane, masz, zad );
+  // czekaj( 5000 );
+   czas2 = obliczSekundy( clock() ); //Stop czasu - drugi pomiar
    cmax = cMax(Dane, masz, zad);
-   cout << "Posortowane \n" << "cmax = " << cmax << endl;    
+   cout << "Posortowane \n" << "cmax = " << cmax << endl;  
+   czas = czas2 - czas1;    // Obliczenie czasu trwania algorytmu
+   cout << "mineło: " << czas << "[s]" << endl;
    wysDane(Dane,zad,masz);
+   return 0;
 }
